@@ -1,0 +1,4 @@
+# Place .aar files here after running: npx cap sync android
+# Required files:
+# - e1-V02.20.02-release.aar
+# - InterfaceAutomacao-v2.0.0.12.aar

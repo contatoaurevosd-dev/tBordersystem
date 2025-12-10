@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Bematech Printers (VID: 0x0B1B = 2843) -->
+    <usb-device vendor-id="2843"/>
+    
+    <!-- Epson Printers (VID: 0x04B8 = 1208) -->
+    <usb-device vendor-id="1208"/>
+    
+    <!-- Star Micronics Printers (VID: 0x0519 = 1305) -->
+    <usb-device vendor-id="1305"/>
+    
+    <!-- Daruma Printers (VID: 0x154F = 5455) -->
+    <usb-device vendor-id="5455"/>
+    
+    <!-- Custom Printers (VID: 0x0DD4 = 3540) -->
+    <usb-device vendor-id="3540"/>
+    
+    <!-- USB-to-Serial Adapters (for serial thermal printers) -->
+    
+    <!-- QinHeng CH340/CH341 (VID: 0x1A86 = 6790) -->
+    <usb-device vendor-id="6790"/>
+    
+    <!-- Prolific PL2303 (VID: 0x067B = 1659) -->
+    <usb-device vendor-id="1659"/>
+    
+    <!-- Silicon Labs CP210x (VID: 0x10C4 = 4292) -->
+    <usb-device vendor-id="4292"/>
+    
+    <!-- FTDI FT232 (VID: 0x0403 = 1027) -->
+    <usb-device vendor-id="1027"/>
+</resources>

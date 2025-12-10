@@ -1,0 +1,90 @@
+// ============================================================
+// PATCH FOR android/app/build.gradle
+// Apply these changes to your existing build.gradle file
+// ============================================================
+
+// ADD inside the android { } block:
+// ------------------------------------------------------------
+android {
+    // ... existing config ...
+    
+    // Add this to include .aar files from libs folder
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
+}
+
+// ADD to the dependencies { } block:
+// ------------------------------------------------------------
+dependencies {
+    // ... existing dependencies ...
+    
+    // Bematech SDK libraries (if using official SDK)
+    // Uncomment these if you have the .aar files in android/app/libs/
+    // implementation(name: 'e1-V02.20.02-release', ext: 'aar')
+    // implementation(name: 'InterfaceAutomacao-v2.0.0.12', ext: 'aar')
+    
+    // Include all .aar files from libs folder
+    implementation fileTree(dir: 'libs', include: ['*.aar'])
+}
+
+// ============================================================
+// FULL EXAMPLE of what android/app/build.gradle should look like:
+// ============================================================
+
+/*
+apply plugin: 'com.android.application'
+
+android {
+    namespace "app.lovable.ossyncprint"
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    
+    defaultConfig {
+        applicationId "app.lovable.ossyncprint"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    
+    // Repository for .aar files
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
+}
+
+repositories {
+    flatDir{
+        dirs '../capacitor-cordova-android-plugins/src/main/libs', 'libs'
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "androidx.appcompat:appcompat:$androidxAppCompatVersion"
+    implementation "androidx.coordinatorlayout:coordinatorlayout:$androidxCoordinatorLayoutVersion"
+    implementation "androidx.core:core-splashscreen:$coreSplashScreenVersion"
+    implementation project(':capacitor-android')
+    testImplementation "junit:junit:$junitVersion"
+    androidTestImplementation "androidx.test.ext:junit:$androidxJunitVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$androidxEspressoCoreVersion"
+    implementation project(':capacitor-cordova-android-plugins')
+    
+    // Include all .aar libraries
+    implementation fileTree(dir: 'libs', include: ['*.aar'])
+}
+
+apply from: 'capacitor.build.gradle'
+*/
