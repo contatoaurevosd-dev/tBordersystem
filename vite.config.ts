@@ -1,12 +1,11 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
-import path from "node:path"; // CORREÇÃO 1: Usa 'node:path' para ambientes Node modernos/Vite
+import path from "node:path";
 import { componentTagger } from "lovable-tagger";
 import { VitePWA } from "vite-plugin-pwa";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
-  // CORREÇÃO 2: Define o plugin de desenvolvimento fora do array para melhor clareza.
   const devPlugins = mode === "development" ? [componentTagger()] : [];
 
   return {
@@ -18,13 +17,26 @@ export default defineConfig(({ mode }) => {
 
         // Domínios do Render
         "tecnobookordersystem.onrender.com",
-        "tecnobookordersystem-1.onrender.com"
+        "tecnobookordersystem-1.onrender.com",
+        "tbordersystem-4.onrender.com" // Incluído para compatibilidade local
       ]
     },
 
+    // AQUI ESTÁ O BLOCO CORRIGIDO E ESSENCIAL PARA O DEPLOY DO RENDER
+    preview: {
+      host: '::', // Permite que o servidor seja acessado de fora (necessário no Render)
+      port: 4173, // A porta correta que o Render usa (detectada no log anterior)
+      allowedHosts: [
+        "localhost",
+        "tecnobookordersystem.onrender.com",
+        "tecnobookordersystem-1.onrender.com",
+        "tbordersystem-4.onrender.com" // O DOMÍNIO ATUAL DO SEU SERVIÇO
+      ]
+    },
+    // FIM DO BLOCO CORRIGIDO
+
     plugins: [
       react(),
-      // CORREÇÃO 3: Usa desestruturação (spread) para incluir plugins de desenvolvimento
       ...devPlugins, 
       VitePWA({
         registerType: "autoUpdate",
@@ -131,7 +143,6 @@ export default defineConfig(({ mode }) => {
     ],
     resolve: {
       alias: {
-        // CORREÇÃO 4: Garante que o __dirname seja resolvido corretamente
         "@": path.resolve(__dirname, "./src"), 
       },
     },
